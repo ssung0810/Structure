@@ -1,6 +1,7 @@
 package StructureInterface;
 
-/* @autor : ssung
+/* 
+ * @autor : ssung
  * @param : <E> the type of elements in this list
  */
 

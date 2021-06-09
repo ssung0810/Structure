@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import StructureInterface.ListInterface;
 
-public class ArrayList<E> implements ListInterface {
+public class ArrayList<E> implements ListInterface<E> {
 	private static final int DEFAULT_CAPACITY = 10;		// 최소(기본) 용적 크기
 	private static final Object[] EMPTY_ARRAY = {};		// 빈 배열
 	
@@ -110,7 +110,6 @@ public class ArrayList<E> implements ListInterface {
 	}
 	
 	
-	@Override
 	public void set(int index, E value) {
 		if(index >= size || index < 0) {
 			throw new IndexOutOfBoundsException();
@@ -156,5 +155,62 @@ public class ArrayList<E> implements ListInterface {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public E remove(int index) {
+		if(index >= size || index < 0) {
+			throw new IndexOutOfBoundsException();
+		}
+		
+		E element = (E) array[index];
+		array[index] = null;
+		
+		for(int i=index; i<size; i++) {
+			array[i] = array[i+1];
+			array[i+1] = null;
+		}
+		
+		size--;
+		resize();
+		return element;
+	}
 	
+	@Override
+	public boolean remove(Object value) {
+		// 삭제하고자 하는 요소의 인덱스 찾기
+		int index = indexOf(value);
+		
+		// -1 이라면 array에 요소가 없다는 의미이므로 flase 반환
+		if(index == -1) {
+			return false;
+		}
+		
+		// index 위치에있는 요소를 삭제
+		remove(index);
+		return true;
+	}
+	
+	
+	@Override
+	public int size() {
+		return size;	// 요소개수 반환
+	}
+	
+	
+	@Override
+	public boolean isEmpty() {
+		return size == 0;
+	}
+	
+	
+	@Override
+	public void clear() {
+		// 모든 공간을 null 처리해준다.
+		for(int i=0; i<size; i++) {
+			array[i] = null;
+		}
+		
+		size = 0;
+		resize();
+	}
 }
