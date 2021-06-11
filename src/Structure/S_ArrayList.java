@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import StructureInterface.ListInterface;
 
-public class ArrayList<E> implements ListInterface<E> {
+public class S_ArrayList<E> implements ListInterface<E> {
 	private static final int DEFAULT_CAPACITY = 10;		// 최소(기본) 용적 크기
 	private static final Object[] EMPTY_ARRAY = {};		// 빈 배열
 	
@@ -13,13 +13,13 @@ public class ArrayList<E> implements ListInterface<E> {
 	Object[] array;		// 요소를 담을 배열
 	
 	// 생성자1 (초기 공간 할당 x)
-	public ArrayList() {
+	public S_ArrayList() {
 		this.array = EMPTY_ARRAY;
 		this.size = 0;
 	}
 	
 	// 생성자2 (초기 공간 할당 o)
-	public ArrayList(int capacity) {
+	public S_ArrayList(int capacity) {
 		this.array = new Object[capacity];
 		this.size = 0;
 	}
