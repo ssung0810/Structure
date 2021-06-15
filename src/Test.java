@@ -1,21 +1,49 @@
-import Structure.S_Stack;
+import java.util.Arrays;
+import java.util.Comparator;
+
+import Structure.S_ArrayQueue;
 
 public class Test {
 
 	public static void main(String[] args) {
-		S_Stack<Integer> s = new S_Stack<Integer>();
+		S_ArrayQueue<Student> s = new S_ArrayQueue<>();
 		
-		s.push(100);
-		System.out.println(s.size());
-		System.out.println(s.peek());
-		System.out.println(s.empty());
-		s.clear();
-		System.out.println(s.push(200));
-		System.out.println(s.pop());
-		System.out.println(s.push(100));
-		System.out.println(s.push(200));
-		System.out.println(s.push(300));
-		System.out.println(s.search(200));
+		s.offer(new Student("aaa", 50));
+		s.offer(new Student("bbb", 20));
+		s.offer(new Student("ccc", 70));
+		s.offer(new Student("ddd", 40));
+		
+		s.sort();
+		
+		for(Object a : s.toArray()) {
+			System.out.println(a);
+		}
 	}
+	
+//	static Comparator<Student> comp = new Comparator<Student>() {
+//		@Override
+//		public int compare(Student o1, Student o2) {
+//			return o2.score - o1.score;
+//		}
+//	};
 
+}
+
+class Student implements Comparable<Student> {
+	String name;
+	int score;
+	
+	Student(String name, int score) {
+		this.name = name;
+		this.score = score;
+	}
+	
+	public String toString() {
+		return "이름: " + name + "\t성적: " + score;
+	}
+	
+	@Override
+	public int compareTo(Student o) {
+		return o.score - this.score;
+	}
 }
