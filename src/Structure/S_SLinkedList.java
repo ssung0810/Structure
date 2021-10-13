@@ -5,8 +5,8 @@ import java.util.NoSuchElementException;
 import StructureInterface.ListInterface;
 
 public class S_SLinkedList<E> implements ListInterface<E> {
-	private S_Node<E> head;		// 노드의 첫 부분
-	private S_Node<E> tail;		// 노드의 마지막 부분
+	private S_Node2<E> head;		// 노드의 첫 부분
+	private S_Node2<E> tail;		// 노드의 마지막 부분
 	private int size;		// 요소 개수
 	
 	// 생성자
@@ -16,12 +16,12 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 		this.size = 0;
 	}
 	
-	public S_Node<E> search(int index) {
+	public S_Node2<E> search(int index) {
 		if(index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
 		
-		S_Node<E> x = head;
+		S_Node2<E> x = head;
 		
 		for(int i=0; i<index; i++) {
 			x = x.next;
@@ -31,12 +31,12 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 	}
 	
 	public void addFirst(E value) {
-		S_Node<E> newNode = new S_Node<E>(value);
-		
+		S_Node2<E> newNode = new S_Node2<E>(value);
+
 		newNode.next = head;
 		head = newNode;
 		size++;
-		
+
 		if(head.next == null) {
 			tail = head;
 		}
@@ -53,7 +53,7 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 			addFirst(value);
 		}
 		
-		S_Node<E> newNode = new S_Node<E>(value);
+		S_Node2<E> newNode = new S_Node2<E>(value);
 		
 		tail.next = newNode;
 		tail = newNode;
@@ -75,9 +75,9 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 			return;
 		}
 		
-		S_Node<E> prev_node = search(index - 1);
-		S_Node<E> next_node = prev_node.next;
-		S_Node<E> new_node = new S_Node<E>(value);
+		S_Node2<E> prev_node = search(index - 1);
+		S_Node2<E> next_node = prev_node.next;
+		S_Node2<E> new_node = new S_Node2<E>(value);
 		
 		prev_node.next = new_node;
 		new_node.next = next_node;
@@ -86,7 +86,7 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 	
 	
 	public E remove() {
-		S_Node<E> headNode = head;
+		S_Node2<E> headNode = head;
 		
 		if(headNode == null) {
 			throw new NoSuchElementException();
@@ -117,9 +117,9 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 			throw new IndexOutOfBoundsException();
 		}
 		
-		S_Node<E> prevNode = search(index - 1);
-		S_Node<E> removeNode = prevNode.next;
-		S_Node<E> nextNode = removeNode.next;
+		S_Node2<E> prevNode = search(index - 1);
+		S_Node2<E> removeNode = prevNode.next;
+		S_Node2<E> nextNode = removeNode.next;
 		
 		E element = removeNode.data;
 		
@@ -133,8 +133,8 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 	}
 	
 	public boolean remove(Object value) {
-		S_Node<E> prevNode = head;
-		S_Node<E> x = head;
+		S_Node2<E> prevNode = head;
+		S_Node2<E> x = head;
 		boolean result = false;
 		
 		for(; x!=null; x=x.next) {
@@ -169,7 +169,7 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 	
 	@Override
 	public void set(int index, E value) {
-		S_Node<E> oldNode = search(index);
+		S_Node2<E> oldNode = search(index);
 		oldNode.data = null;
 		oldNode.data = value;
 	}
@@ -178,7 +178,7 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 	public int indexOf(Object value) {
 		int index = 0;
 		
-		for(S_Node<E> x=head; x!=null; x=x.next) {
+		for(S_Node2<E> x=head; x!=null; x=x.next) {
 			if(value.equals(x.data)) {
 				return index;
 			}
@@ -206,8 +206,8 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 	
 	@Override
 	public void clear() {
-		for(S_Node<E> x=head; x!=null;) {
-			S_Node<E> nextNode = x;
+		for(S_Node2<E> x=head; x!=null;) {
+			S_Node2<E> nextNode = x;
 			x.data = null;
 			x.next = null;
 			x = nextNode.next;
@@ -224,7 +224,7 @@ public class S_SLinkedList<E> implements ListInterface<E> {
 		sl.tail = null;
 		sl.size = 0;
 		
-		for(S_Node<E> x=head; x!=null; x=x.next) {
+		for(S_Node2<E> x=head; x!=null; x=x.next) {
 			sl.addLast(x.data);
 		}
 		
